@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from “react”;
+const { useState, useEffect, useCallback } = React;
 
 const PEOPLE_KEY = “mate-people”;
 const CEBADAS_KEY = “mate-cebadas”;
@@ -29,7 +29,7 @@ const now = new Date();
 return now.toISOString().slice(0, 16);
 }
 
-export default function MateCounter() {
+function MateCounter() {
 const [people, setPeople] = useState([“Taiel”, “Martín”, “Facu”]);
 const [cebadas, setCebadas] = useState([]);
 const [loading, setLoading] = useState(true);
