@@ -922,3 +922,5 @@ cursor: “pointer”,
 fontWeight: 600,
 },
 };
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<MateCounter />);
