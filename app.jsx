@@ -45,31 +45,26 @@ const [statsDay, setStatsDay] = useState(formatDateKey(new Date().toISOString())
 
 // Load data
 useEffect(() => {
-async function load() {
 try {
-const [pRes, cRes] = await Promise.all([
-window.storage.get(PEOPLE_KEY),
-window.storage.get(CEBADAS_KEY),
-]);
-if (pRes?.value) setPeople(JSON.parse(pRes.value));
-if (cRes?.value) setCebadas(JSON.parse(cRes.value));
+const p = localStorage.getItem(PEOPLE_KEY);
+const c = localStorage.getItem(CEBADAS_KEY);
+if (p) setPeople(JSON.parse(p));
+if (c) setCebadas(JSON.parse(c));
 } catch (e) {
 console.log(“First load or no data yet”);
 }
 setLoading(false);
-}
-load();
 }, []);
 
 // Save helpers
-const savePeople = useCallback(async (p) => {
+const savePeople = useCallback((p) => {
 setPeople(p);
-try { await window.storage.set(PEOPLE_KEY, JSON.stringify(p)); } catch (e) { console.error(e); }
+try { localStorage.setItem(PEOPLE_KEY, JSON.stringify(p)); } catch (e) { console.error(e); }
 }, []);
 
-const saveCebadas = useCallback(async (c) => {
+const saveCebadas = useCallback((c) => {
 setCebadas(c);
-try { await window.storage.set(CEBADAS_KEY, JSON.stringify(c)); } catch (e) { console.error(e); }
+try { localStorage.setItem(CEBADAS_KEY, JSON.stringify(c)); } catch (e) { console.error(e); }
 }, []);
 
 // Count per person
